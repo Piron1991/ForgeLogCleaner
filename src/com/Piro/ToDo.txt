@@ -1,0 +1,10 @@
+1.Gui
+    -select file
+    -make sure only valid files are choosable
+    -select output place
+    -select which logtypes ignore(main/client/server trace/debug/error/warn/)-multiselectable
+
+2. detect if valid filename
+3.build string to ignore
+4.get line from file
+5.check line with built string and if not same copy to new log
