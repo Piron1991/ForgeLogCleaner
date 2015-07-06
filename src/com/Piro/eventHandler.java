@@ -7,33 +7,39 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 
-public class eventHandler implements ActionListener,ItemListener {
+public class EventHandler implements ActionListener,ItemListener {
 
 
-    private JFileChooser fc = screen.getFileChooser();
+    private JFileChooser fc = Screen.getFileChooser();
 
 
-    private static File file;
+    private static File file,curDir;
+    private static Path pFile,pCurDir;
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == screen.getOpenButton()) {
+        if (e.getSource() == Screen.getOpenButton()) {
             int returnVal = fc.showOpenDialog(fc);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 file = fc.getSelectedFile();
+                curDir=fc.getCurrentDirectory();
+                pFile=Paths.get(file.getPath());
+                pCurDir=Paths.get(curDir.getPath());
+
                 //TODO stuff
-                System.out.println(file.getName());
             }
 
         }
-        if (e.getSource() == screen.getRunButton()) {
+        if (e.getSource() == Screen.getRunButton()) {
             if (file!=null) {
                 try {
-                    fileConversionHandler.runConversion(file);
+                    FileConversionHandler.runConversion(pFile,pCurDir);
                 } catch (IOException exc) {
-                    exc.fillInStackTrace();
+                    exc.printStackTrace();
                 }
             }else{
                 //TODO throw msg

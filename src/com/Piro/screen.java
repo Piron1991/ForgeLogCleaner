@@ -1,19 +1,11 @@
 package com.Piro;
 
-import javax.jnlp.FileContents;
-import javax.jnlp.FileOpenService;
-import javax.jnlp.ServiceManager;
-import javax.jnlp.UnavailableServiceException;
 import javax.swing.*;
-import javax.swing.text.JTextComponent;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
 
-public class screen extends JPanel{
+public class Screen extends JPanel{
 
-    private static int typeLength = reference.LOGTYPES.length;
+    private static int typeLength = ReferenceStrings.LOGTYPES.length;
     private static JCheckBox[] checkBox=new JCheckBox[typeLength];
     private static JLabel name,author,version,info;
     private static JButton openButton,runButton;
@@ -22,26 +14,34 @@ public class screen extends JPanel{
     private static JFrame frame;
 
 
-    public screen(){
+    public Screen(){
         super(new GridLayout(4,0));
 
+
+
         //Create instances for all variables
-        fileChooser = new JFileChooser();
-        name=new JLabel(reference.NAME);
-        author=new JLabel(reference.AUTHOR);
-        version=new JLabel(reference.VERSION);
-        info=new JLabel(reference.INFO);
+        fileChooser = new JFileChooser(ReferenceStrings.CURRENTPATH+"/logs");
+        name=new JLabel(ReferenceStrings.NAME);
+        author=new JLabel(ReferenceStrings.AUTHOR);
+        version=new JLabel(ReferenceStrings.VERSION);
+        info=new JLabel(ReferenceStrings.INFO);
         openButton= new JButton("...");
         runButton = new JButton("Convert");
         for (int i=0;i<typeLength;i++){
-            checkBox[i]=new JCheckBox(reference.LOGTYPES[i],true);
-            checkBox[i].addItemListener(new eventHandler());
+            if (!ReferenceStrings.LOGTYPES[i].contains("/")){
+                checkBox[i]=new JCheckBox(ReferenceStrings.LOGTYPES[i]+"/",true);
+
+            }else{
+                checkBox[i]=new JCheckBox(ReferenceStrings.LOGTYPES[i],true);
+
+            }
+            checkBox[i].addItemListener(new EventHandler());
         }
 
-        fileChooser.setFileFilter(new logFilter());
+        fileChooser.setFileFilter(new LogFilter());
         fileChooser.setMultiSelectionEnabled(false);
-        openButton.addActionListener(new eventHandler());
-        runButton.addActionListener(new eventHandler());
+        openButton.addActionListener(new EventHandler());
+        runButton.addActionListener(new EventHandler());
 
         //TODO fix layout crap
         topPanel = new JPanel(new GridLayout(4, 0));
@@ -68,7 +68,7 @@ public class screen extends JPanel{
     public static void setupGUI(){
         frame = new JFrame("Forge Log Cleaner");
         //Add content to the window.
-        frame.add(new screen());
+        frame.add(new Screen());
 
 
         //Display the window.

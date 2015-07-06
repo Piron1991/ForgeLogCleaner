@@ -2,38 +2,62 @@ package com.Piro;
 
 import javax.swing.*;
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.file.*;
 import java.util.*;
 
-public class fileConversionHandler {
+public class FileConversionHandler {
 
     private static ArrayList <String> processedList=new ArrayList<String>();
 
 
-    public static void runConversion(File file) throws IOException{
-    BufferedWriter bw = null;
+    public static void runConversion(Path file, Path directory) throws IOException{
+        BufferedWriter bw = null;
         BufferedReader br=null;
         processCheckbox();
-    String name = file.getName().substring(0,file.getName().indexOf(".log"))+"_converted.log";
+        Path convertedFile=Paths.get(Config.outDir.toString());
+        String name = (file.toString().substring(file.toString().lastIndexOf(File.separatorChar),file.toString().indexOf(".log")))+"-converted.log";
+        Path f=Paths.get(convertedFile + name);
         try{
-            bw = new BufferedWriter(new FileWriter(new File(file.getAbsolutePath(),name)));
-            br =new  BufferedReader(new FileReader(file));
+            if (!Files.exists(f)) {
+                f = Files.createFile(f);
+            }else{
+                Files.deleteIfExists(f);
+                f = Files.createFile(f);
+            }
 
+            br  = Files.newBufferedReader(file);
+            bw = Files.newBufferedWriter(f, StandardOpenOption.DSYNC,StandardOpenOption.WRITE);
+
+
+            boolean finish=true;
+            while(finish) {
+                String tempLine = br.readLine();
+                if (CheckStringValid(tempLine)) {
+                    //System.out.println(tempLine);
+                    bw.write(tempLine);
+                    bw.newLine();
+                }
+            if (tempLine==null) finish=false;
+            }
+
+            bw.flush();
+            bw.close();
         }
-        catch(FileNotFoundException e){
-            e.fillInStackTrace();
-        }catch(Exception e){ e.fillInStackTrace();}
-
-
+        catch(Exception e){
+            e.printStackTrace();
+        }
         //TODO stuff
+
     }
 
     public static void processCheckbox(){
-        JCheckBox[] cb = screen.getCheckBox();
+        JCheckBox[] cb = Screen.getCheckBox();
 
         for (JCheckBox c :cb) {
             if(c.getSelectedObjects()!=null){
                 Object word = c.getSelectedObjects()[0];
-                System.out.println(word);
+                //System.out.println(word)
                 processedList.add(word.toString());
             }
 
@@ -42,4 +66,21 @@ public class fileConversionHandler {
 
         //TODO stuff
     }
+
+
+    private static boolean CheckStringValid(String s) {
+        if (s != null) {
+            for (String iter : processedList) {
+                if (s.contains(iter)) {
+                    //return false;
+
+                    return !s.contains(iter);
+                }
+            }
+        }
+        if ()
+    return s!=null;
+    }
+
+
 }
