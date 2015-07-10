@@ -12,23 +12,18 @@ public class FileConversionHandler {
 
 
     public static void runConversion(Path file, Path directory) throws IOException{
-        BufferedWriter bw = null;
-        BufferedReader br=null;
+        BufferedWriter bw;
+        BufferedReader br;
         processCheckbox();
         Path convertedFile=Paths.get(Config.outDir.toString());
         String name = (file.toString().substring(file.toString().lastIndexOf(File.separatorChar),file.toString().indexOf(".log")))+"-converted.log";
         Path f=Paths.get(convertedFile + name);
         try{
-            if (!Files.exists(f)) {
-                f = Files.createFile(f);
-            }else{
-                Files.deleteIfExists(f);
-                f = Files.createFile(f);
-            }
+            Files.deleteIfExists(f);
+            f = Files.createFile(f);
 
             br  = Files.newBufferedReader(file);
             bw = Files.newBufferedWriter(f, StandardOpenOption.DSYNC,StandardOpenOption.WRITE);
-
 
             boolean finish=true;
             while(finish) {
@@ -73,12 +68,14 @@ public class FileConversionHandler {
             for (String iter : processedList) {
                 if (s.contains(iter)) {
                     //return false;
+                   return !s.contains(iter);
+                }else if(s.startsWith(" \n")){
+                    return false;
 
-                    return !s.contains(iter);
                 }
             }
         }
-        if ()
+
     return s!=null;
     }
 

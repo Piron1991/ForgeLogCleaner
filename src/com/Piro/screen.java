@@ -17,8 +17,6 @@ public class Screen extends JPanel{
     public Screen(){
         super(new GridLayout(4,0));
 
-
-
         //Create instances for all variables
         fileChooser = new JFileChooser(ReferenceStrings.CURRENTPATH+"/logs");
         name=new JLabel(ReferenceStrings.NAME);
@@ -38,11 +36,13 @@ public class Screen extends JPanel{
             checkBox[i].addItemListener(new EventHandler());
         }
 
+        //set modifiers and action listeners
         fileChooser.setFileFilter(new LogFilter());
         fileChooser.setMultiSelectionEnabled(false);
         openButton.addActionListener(new EventHandler());
         runButton.addActionListener(new EventHandler());
 
+        //layout
         //TODO fix layout crap
         topPanel = new JPanel(new GridLayout(4, 0));
         openPanel = new JPanel();
@@ -63,18 +63,10 @@ public class Screen extends JPanel{
         add(openPanel);
         add(checkboxPanel);
         add(bottomPanel);
-    }
-
-    public static void setupGUI(){
-        frame = new JFrame("Forge Log Cleaner");
-        //Add content to the window.
-        frame.add(new Screen());
 
 
-        //Display the window.
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+
+
     }
 
 

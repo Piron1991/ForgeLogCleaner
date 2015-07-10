@@ -12,7 +12,11 @@ public class Main {
             public void run() {
                 //Turn off metal's use of bold fonts
                 UIManager.put("swing.boldMetal", Boolean.FALSE);
-                Screen.setupGUI();
+                JFrame frame = new JFrame("Forge Log Cleaner");
+                frame.add(new Screen());
+                frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                frame.pack();
+                frame.setVisible(true);
             }
         });
     }
