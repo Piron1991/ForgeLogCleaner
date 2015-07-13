@@ -46,21 +46,6 @@
 [17:57:28] [main/INFO] [LaunchWrapper/]: Calling tweak class cpw.mods.fml.relauncher.CoreModManager$FMLPluginWrapper
 [17:57:28] [main/INFO] [LaunchWrapper/]: Calling tweak class cpw.mods.fml.common.launcher.FMLDeobfTweaker
 [17:57:29] [main/DEBUG] [CoFH ASM/]: Adding Accesstransformer map: CoFH_at.cfg
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 [17:57:30] [main/INFO] [LaunchWrapper/]: Calling tweak class cpw.mods.fml.relauncher.CoreModManager$FMLPluginWrapper
 [17:57:30] [main/INFO] [LaunchWrapper/]: Calling tweak class cpw.mods.fml.relauncher.CoreModManager$FMLPluginWrapper
 [17:57:30] [main/INFO] [LaunchWrapper/]: Calling tweak class cpw.mods.fml.relauncher.CoreModManager$FMLPluginWrapper
@@ -202,16 +187,11 @@
 [17:57:47] [Client thread/DEBUG] [CCL ASM/]: Replacing method [bny.a(IIIII)V] @ 7 - 16
 [17:57:48] [Client thread/INFO] [STDOUT/]: [cpw.mods.fml.client.SplashProgress:start:188]: ---- Minecraft Crash Report ----
 // Would you like a cupcake?
-
 Time: 24.06.15 17:57
 Description: Loading screen debug info
-
 This is just a prompt for computer specs to be printed. THIS IS NOT A ERROR
-
-
 A detailed walkthrough of the error, its code path and all known details is as follows:
 ---------------------------------------------------------------------------------------
-
 -- System Details --
 Details:
 	Minecraft Version: 1.7.10

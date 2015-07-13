@@ -14,8 +14,20 @@ public class Screen extends JPanel{
     private static JFrame frame;
 
 
+
+    private static JTextArea log;
+
+
     public Screen(){
         super(new GridLayout(4,0));
+
+        //logger copy
+        log = new JTextArea(5,20);
+        log.setMargin(new Insets(5,5,5,5));
+        log.setEditable(false);
+        JScrollPane logScrollPane = new JScrollPane(log);
+        
+
 
         //Create instances for all variables
         fileChooser = new JFileChooser(ReferenceStrings.CURRENTPATH+"/logs");
@@ -63,7 +75,7 @@ public class Screen extends JPanel{
         add(openPanel);
         add(checkboxPanel);
         add(bottomPanel);
-
+        add(logScrollPane,BorderLayout.PAGE_END);
 
 
 
@@ -84,5 +96,9 @@ public class Screen extends JPanel{
 
     public static JFileChooser getFileChooser() {
         return fileChooser;
+    }
+
+    public static JTextArea getLog() {
+        return log;
     }
 }

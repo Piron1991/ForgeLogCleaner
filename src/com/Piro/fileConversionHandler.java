@@ -2,7 +2,6 @@ package com.Piro;
 
 import javax.swing.*;
 import java.io.*;
-import java.nio.charset.Charset;
 import java.nio.file.*;
 import java.util.*;
 
@@ -39,8 +38,8 @@ public class FileConversionHandler {
             bw.flush();
             bw.close();
         }
-        catch(Exception e){
-            e.printStackTrace();
+        catch(Exception exc){
+            LogCleanerLogger.addToLog(exc);
         }
         //TODO stuff
 
@@ -69,7 +68,7 @@ public class FileConversionHandler {
                 if (s.contains(iter)) {
                     //return false;
                    return !s.contains(iter);
-                }else if(s.startsWith(" \n")){
+                }else if(s.equals("")){
                     return false;
 
                 }

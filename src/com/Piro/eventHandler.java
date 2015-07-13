@@ -39,9 +39,10 @@ public class EventHandler implements ActionListener,ItemListener {
                 try {
                     FileConversionHandler.runConversion(pFile,pCurDir);
                 } catch (IOException exc) {
-                    exc.printStackTrace();
+                    LogCleanerLogger.addToLog(exc);
                 }
             }else{
+                LogCleanerLogger.ThrowMsgDialog("File was not choosen! Please select a file.");
                 //TODO throw msg
             }
         }
@@ -49,14 +50,7 @@ public class EventHandler implements ActionListener,ItemListener {
 
     @Override
     public void itemStateChanged(ItemEvent e) {
-       /* JCheckBox[] cb = screen.getCheckBox();
 
-        Object source =e.getSource();
-          //  System.out.print(e.getStateChange()+"\n");
-        System.out.println(cb[1].getSelectedObjects()[0]);
-        if (source == cb) {//TODO clean this
-
-        }*/
     }
 
     public static File getFile() {
